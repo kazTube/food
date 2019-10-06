@@ -11,6 +11,8 @@ import {
   Portal,
   TemplatePortalDirective
 } from '@angular/cdk/portal';
+import { ObserverService } from 'src/app/core/observer.service';
+import { SelectionFoodService } from '../selection-food.service';
 
 @Component({
   selector: 'app-foor-selection',
@@ -24,67 +26,12 @@ export class FoorSelectionComponent implements OnInit {
   checked: any[] = [];
   checkedNumber: number = 0;
   limitChecked = 3;
-  foods: FoodDTO[] = [
-    { "foodName": "Chicken Burrito", "foodType": "Burrito", "protein": "chicken", "calories": 975 },
-    { "foodName": "Steak Burrito", "foodType": "Burrito", "protein": "steak", "calories": 945 },
-    { "foodName": "Carnitas Burrito", "foodType": "Burrito", "protein": "carnitas", "calories": 1005 },
-    { "foodName": "Barbacoa Burrito", "foodType": "Burrito", "protein": "barbacoa", "calories": 965 },
-    { "foodName": "Chorizo Burrito", "foodType": "Burrito", "protein": "chorizo", "calories": 1095 },
-    { "foodName": "Sofritas Burrito", "foodType": "Burrito", "protein": "sofritas", "calories": 945 },
-    { "foodName": "Chicken Corn Tortilla Taco", "foodType": "Taco", "protein": "chicken", "calories": 650 },
-    { "foodName": "Chicken Flour Tortilla Taco", "foodType": "Taco", "protein": "chicken", "calories": 700 },
-    { "foodName": "Steak Corn Tortilla Taco", "foodType": "Taco", "protein": "steak", "calories": 620 },
-    { "foodName": "Steak Flour Tortilla Taco", "foodType": "Taco", "protein": "steak", "calories": 670 },
-    { "foodName": "Carnitas Corn Tortilla Taco", "foodType": "Taco", "protein": "carnitas", "calories": 680 },
-    { "foodName": "Carnitas Flour Tortilla Taco", "foodType": "Taco", "protein": "carnitas", "calories": 730 },
-    { "foodName": "Barbacoa Corn Tortilla Taco", "foodType": "Taco", "protein": "barbacoa", "calories": 640 },
-    { "foodName": "Barbacoa Flour Tortilla Taco", "foodType": "Taco", "protein": "barbacoa", "calories": 690 },
-    { "foodName": "Chorizo Corn Tortilla Taco", "foodType": "Taco", "protein": "chorizo", "calories": 770 },
-    { "foodName": "Chorizo Flour Tortilla Taco", "foodType": "Taco", "protein": "chorizo", "calories": 820 },
-    { "foodName": "Sofritas Corn Tortilla Taco", "foodType": "Taco", "protein": "sofritas", "calories": 620 },
-    { "foodName": "Sofritas Flour Tortilla Taco", "foodType": "Taco", "protein": "sofritas", "calories": 670 },
-    { "foodName": "Chicken Burrito", "foodType": "Burrito", "protein": "chicken", "calories": 975 },
-    { "foodName": "Steak Burrito", "foodType": "Burrito", "protein": "steak", "calories": 945 },
-    { "foodName": "Carnitas Burrito", "foodType": "Burrito", "protein": "carnitas", "calories": 1005 },
-    { "foodName": "Barbacoa Burrito", "foodType": "Burrito", "protein": "barbacoa", "calories": 965 },
-    { "foodName": "Chorizo Burrito", "foodType": "Burrito", "protein": "chorizo", "calories": 1095 },
-    { "foodName": "Sofritas Burrito", "foodType": "Burrito", "protein": "sofritas", "calories": 945 },
-    { "foodName": "Chicken Corn Tortilla Taco", "foodType": "Taco", "protein": "chicken", "calories": 650 },
-    { "foodName": "Chicken Flour Tortilla Taco", "foodType": "Taco", "protein": "chicken", "calories": 700 },
-    { "foodName": "Steak Corn Tortilla Taco", "foodType": "Taco", "protein": "steak", "calories": 620 },
-    { "foodName": "Steak Flour Tortilla Taco", "foodType": "Taco", "protein": "steak", "calories": 670 },
-    { "foodName": "Carnitas Corn Tortilla Taco", "foodType": "Taco", "protein": "carnitas", "calories": 680 },
-    { "foodName": "Carnitas Flour Tortilla Taco", "foodType": "Taco", "protein": "carnitas", "calories": 730 },
-    { "foodName": "Barbacoa Corn Tortilla Taco", "foodType": "Taco", "protein": "barbacoa", "calories": 640 },
-    { "foodName": "Barbacoa Flour Tortilla Taco", "foodType": "Taco", "protein": "barbacoa", "calories": 690 },
-    { "foodName": "Chorizo Corn Tortilla Taco", "foodType": "Taco", "protein": "chorizo", "calories": 770 },
-    { "foodName": "Chorizo Flour Tortilla Taco", "foodType": "Taco", "protein": "chorizo", "calories": 820 },
-    { "foodName": "Sofritas Corn Tortilla Taco", "foodType": "Taco", "protein": "sofritas", "calories": 620 },
-    { "foodName": "Sofritas Flour Tortilla Taco", "foodType": "Taco", "protein": "sofritas", "calories": 670 },
-    { "foodName": "Chicken Burrito", "foodType": "Burrito", "protein": "chicken", "calories": 975 },
-    { "foodName": "Steak Burrito", "foodType": "Burrito", "protein": "steak", "calories": 945 },
-    { "foodName": "Carnitas Burrito", "foodType": "Burrito", "protein": "carnitas", "calories": 1005 },
-    { "foodName": "Barbacoa Burrito", "foodType": "Burrito", "protein": "barbacoa", "calories": 965 },
-    { "foodName": "Chorizo Burrito", "foodType": "Burrito", "protein": "chorizo", "calories": 1095 },
-    { "foodName": "Sofritas Burrito", "foodType": "Burrito", "protein": "sofritas", "calories": 945 },
-    { "foodName": "Chicken Corn Tortilla Taco", "foodType": "Taco", "protein": "chicken", "calories": 650 },
-    { "foodName": "Chicken Flour Tortilla Taco", "foodType": "Taco", "protein": "chicken", "calories": 700 },
-    { "foodName": "Steak Corn Tortilla Taco", "foodType": "Taco", "protein": "steak", "calories": 620 },
-    { "foodName": "Steak Flour Tortilla Taco", "foodType": "Taco", "protein": "steak", "calories": 670 },
-    { "foodName": "Carnitas Corn Tortilla Taco", "foodType": "Taco", "protein": "carnitas", "calories": 680 },
-    { "foodName": "Carnitas Flour Tortilla Taco", "foodType": "Taco", "protein": "carnitas", "calories": 730 },
-    { "foodName": "Barbacoa Corn Tortilla Taco", "foodType": "Taco", "protein": "barbacoa", "calories": 640 },
-    { "foodName": "Barbacoa Flour Tortilla Taco", "foodType": "Taco", "protein": "barbacoa", "calories": 690 },
-    { "foodName": "Chorizo Corn Tortilla Taco", "foodType": "Taco", "protein": "chorizo", "calories": 770 },
-    { "foodName": "Chorizo Flour Tortilla Taco", "foodType": "Taco", "protein": "chorizo", "calories": 820 },
-    { "foodName": "Sofritas Corn Tortilla Taco", "foodType": "Taco", "protein": "sofritas", "calories": 620 },
-    { "foodName": "Sofritas Flour Tortilla Taco", "foodType": "Taco", "protein": "sofritas", "calories": 670 },
-
-  ]
+  foods: FoodDTO;
   nextPosition: number = 0;
   checkedCTRL: boolean;
   counter = 0;
-  constructor(public viewContainerRef: ViewContainerRef, public overlay: Overlay, private router: Router) { }
+  constructor(public viewContainerRef: ViewContainerRef, public overlay: Overlay,
+    private router: Router, private observer: ObserverService, private service: SelectionFoodService) { }
 
 
   select(calories: number, event) {
@@ -106,30 +53,32 @@ export class FoorSelectionComponent implements OnInit {
       this.checkedCTRL = false;
       this.counter--;
     }
+
   }
 
-  openRotiniPanel() {
-
-    let config = new OverlayConfig();
-
-    config.positionStrategy = this.overlay.position()
-      .global()
-      .left(`${this.nextPosition}px`)
-      .top(`${this.nextPosition}px`);
-
-    this.nextPosition += 30;
-
-    config.hasBackdrop = true;
-
-    let overlayRef = this.overlay.create(config);
-
-    overlayRef.backdropClick().subscribe(() => {
-      overlayRef.dispose();
-    });
-
-    overlayRef.attach(new ComponentPortal(RotiniPanel, this.viewContainerRef));
+  submit() {
+    this.observer.stateId.subscribe(
+      r => {
+        this.service.setVote(r,this.selectedFood).subscribe(
+          r => {
+            console.log(r);
+            
+          }
+        );
+      }
+    );
   }
+
+
   ngOnInit() {
+    this.observer.stateFoods.subscribe(
+      r => {
+
+        this.foods = r['data'];
+
+      }
+
+    );
   }
 
 }

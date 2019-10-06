@@ -5,7 +5,7 @@ import { MaterialModule } from '../material/material.module';
 
 import { HttpRequestInterceptor } from './httpInserptors/http-request.interceptors';
 import { HttpResponseInterceptors } from './httpInserptors/http-response.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -23,6 +23,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     MaterialModule
   ]
 })
