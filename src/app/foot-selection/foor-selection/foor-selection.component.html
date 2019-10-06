@@ -1,0 +1,54 @@
+<div class="search">
+    <h2>استان اصفهان</h2>
+
+    <div class="search__box">
+        <div class="search__box-input">
+            <input type="text" placeholder="x">
+        </div>
+        <div class="search__box-list">
+            <cdk-virtual-scroll-viewport itemSize="2" class="scrolling-viewport">
+                <mat-list dir="rtl">
+                    <mat-list-item *cdkVirtualFor="let i of foods" #food>
+                        <!-- <div class="mat-list-text">
+                            {{i.foodName}}
+                        </div>
+
+                        <mat-checkbox 
+                            [disabled]="checkedCTRL && counter === 3"
+                            (change)="select(i.calories, $event)">
+                        </mat-checkbox> -->
+
+
+
+
+                        <label>
+
+                            {{i.foodName}}
+                            <input type="checkbox" (change)="select(i.calories, $event)">
+
+                        </label>
+
+
+
+
+
+
+
+
+
+
+
+                    </mat-list-item>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </div>
+
+</div>
+<div class="search__box-button">
+    <div class="search__box-button-step">3/{{selectedFood.length}}</div>
+    <div class="search__box-button-text">ثبت</div>
+</div>
+<!-- [ngClass]="{'disable': selectedFood.length >= 3}" -->
+<!-- [checked]="selectedFood.length >= 3 " -->
+<!-- [disabled]="selectedFood.length >= 3" -->
