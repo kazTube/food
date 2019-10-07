@@ -16,7 +16,6 @@ export class HttpResponseInterceptors implements HttpInterceptor {
         retry(1),
         map(event => {
           if (event instanceof HttpResponse) {
-            console.log('test');
 
             event = event.clone({ body: event.body.result });
           }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StartService } from './start.service';
+import { RoutingService } from './routing/routing.service';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +9,25 @@ import { StartService } from './start.service';
 })
 export class AppComponent {
   title = 'food';
-  constructor(private service: StartService) {
-    console.log('hello');
-    
-    if(!localStorage.getItem('generalId')) {
+  isNavigation: boolean;
+  constructor(private service: StartService, private routeService: RoutingService) {
+    if (!localStorage.getItem('generalId')) {
       this.service.getToken().subscribe(
         r => {
-          console.log(r);
-          localStorage.setItem('Token',r['guest_token']);
-          
+          localStorage.setItem('Token', r['guest_token']);
+
         }
       );
-    }else {
-      console.log('goodbye');
-      
+
+
+
+      this.routeService.isNavigate.subscribe(
+        r => {
+          if (r) {
+            this.isNavigation = r
+          }
+        }
+      );
     }
   }
 }

@@ -13,6 +13,7 @@ import {
 } from '@angular/cdk/portal';
 import { ObserverService } from 'src/app/core/observer.service';
 import { SelectionFoodService } from '../selection-food.service';
+import { RoutingService } from 'src/app/routing/routing.service';
 
 @Component({
   selector: 'app-foor-selection',
@@ -31,7 +32,8 @@ export class FoorSelectionComponent implements OnInit {
   checkedCTRL: boolean;
   counter = 0;
   constructor(public viewContainerRef: ViewContainerRef, public overlay: Overlay,
-    private router: Router, private observer: ObserverService, private service: SelectionFoodService) { }
+    private router: Router, private observer: ObserverService, private service: SelectionFoodService,
+    private routeService: RoutingService) { }
 
 
   select(calories: number, event) {
@@ -59,10 +61,17 @@ export class FoorSelectionComponent implements OnInit {
   submit() {
     this.observer.stateId.subscribe(
       r => {
-        this.service.setVote(r,this.selectedFood).subscribe(
+        this.service.setVote(r, this.selectedFood).subscribe(
           r => {
-            console.log(r);
-            
+            this.routeService.setNavigat(true);
+            if (r) {
+              this.routeService.setNavigat(false);
+
+              console.log(r);
+
+            } else {
+              this.routeService.setNavigat(true);
+            }
           }
         );
       }
@@ -73,11 +82,14 @@ export class FoorSelectionComponent implements OnInit {
   ngOnInit() {
     this.observer.stateFoods.subscribe(
       r => {
-
-        this.foods = r['data'];
-
+        this.routeService.setNavigat(true);
+        if (r) {
+          this.routeService.setNavigat(false);
+          this.foods = r['data'];
+        } else {
+          this.routeService.setNavigat(true);
+        }
       }
-
     );
   }
 

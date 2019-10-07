@@ -4,4 +4,6 @@ export class RestAddresses {
     static readonly GUESTTOKEN = RestAddresses.baseUrl + 'guest-token'
     static readonly FOODS = RestAddresses.baseUrl +  "foods";
     static readonly VOTE = RestAddresses.baseUrl +  "vote";
+    static readonly REGISTER = RestAddresses.baseUrl +  "register";
+    static readonly LOGIN = RestAddresses.baseUrl +  "login";
 }

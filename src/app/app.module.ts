@@ -10,7 +10,8 @@ import { HomeMobileModule } from './home/home-mobile/home-mobile.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './material/material.module';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeModule,
     HomeMobileModule,
     CoreModule,
-    // MaterialModule,
+    MaterialModule,
     DeviceDetectorModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule

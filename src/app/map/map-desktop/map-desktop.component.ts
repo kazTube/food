@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapService } from '../map.service';
 import { ObserverService } from 'src/app/core/observer.service';
+import { RoutingService } from 'src/app/routing/routing.service';
 
 @Component({
   selector: 'app-map-desktop',
@@ -10,16 +11,20 @@ import { ObserverService } from 'src/app/core/observer.service';
 })
 export class MapDesktopComponent implements OnInit {
 
-  constructor(private service: MapService, private router: Router, private observer: ObserverService) { }
+  constructor(private service: MapService, private router: Router, private observer: ObserverService, private routeService: RoutingService) { }
 
   point(id: number) {
-   this.observer.setStateId(id);
+    this.observer.setStateId(id);
     this.service.getFoods(id).subscribe(
       r => {
+        this.routeService.setNavigat(true);
         if (r) {
-
+          this.routeService.setNavigat(false);
           this.observer.setFoods(r);
           this.router.navigateByUrl('selection');
+        } else {
+          this.routeService.setNavigat(true);
+
         }
       }
     );

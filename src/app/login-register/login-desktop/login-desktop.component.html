@@ -1,0 +1,19 @@
+<div class="login">
+    <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div>
+            <input type="text" placeholder="نام کاربری" formControlName="username">
+            <div class="errorcontainer">
+
+            </div>
+        </div>
+        <div>
+            <input type="password" placeholder="گذرواژه" formControlName="password">
+            <div class="errorcontainer">
+
+            </div>
+
+        </div>
+
+        <button class="btn">ورود</button>
+    </form>
+</div> 
