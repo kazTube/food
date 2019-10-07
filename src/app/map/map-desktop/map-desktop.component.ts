@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MapService } from '../map.service';
 import { ObserverService } from 'src/app/core/observer.service';
 import { RoutingService } from 'src/app/routing/routing.service';
+import { DialogService } from 'src/app/core/dialog.service';
 
 @Component({
   selector: 'app-map-desktop',
@@ -11,7 +12,11 @@ import { RoutingService } from 'src/app/routing/routing.service';
 })
 export class MapDesktopComponent implements OnInit {
 
-  constructor(private service: MapService, private router: Router, private observer: ObserverService, private routeService: RoutingService) { }
+  constructor(private service: MapService, 
+              private router: Router, 
+              private observer: ObserverService, 
+              private routeService: RoutingService,
+              private dialogService:DialogService) { }
 
   point(id: number) {
     this.observer.setStateId(id);
@@ -31,6 +36,10 @@ export class MapDesktopComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+    this.dialogService.openConfirmDialog('برای رای دادن به بیش از یک استان عضو شوید.');
+      
+    }, 5000);
   }
 
 }

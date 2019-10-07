@@ -1,0 +1,8 @@
+<div dir="rtl">
+    <div class="content-container">
+        <mat-icon id="close-icon" (click)="closeDialog()">close</mat-icon>
+        <p>{{data.message}}</p>
+    </div>
+    <a mat-flat-button routerLink="login-register" (click)="closeDialog()">ثبت نام</a>
+    <a mat-flat-button routerLink="login-register/login" (click)="closeDialog()">ورود</a>
+</div>

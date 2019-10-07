@@ -11,11 +11,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { MatDialogeComponent } from './mat-dialoge/mat-dialoge.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MatDialogeComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,7 @@ import { MaterialModule } from './material/material.module';
     BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[MatDialogeComponent]
 })
 export class AppModule { }
