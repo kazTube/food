@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StartService } from './start.service';
 import { RoutingService } from './routing/routing.service';
 
@@ -7,20 +7,23 @@ import { RoutingService } from './routing/routing.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'food';
   isNavigation: boolean;
   constructor(private service: StartService, private routeService: RoutingService) {
-    if (!localStorage.getItem('generalId')) {
+
+  }
+  ngOnInit() {
+    if (!localStorage.getItem('Token') && !localStorage.getItem('guest_token')) {
+      console.log('new token');
+
+
       this.service.getToken().subscribe(
         r => {
-          localStorage.setItem('Token', r['guest_token']);
+          localStorage.setItem('guest_token', r['guest_token']);
 
         }
       );
-
-
-
       this.routeService.isNavigate.subscribe(
         r => {
           if (r) {
@@ -28,6 +31,12 @@ export class AppComponent {
           }
         }
       );
+
+
+
+    } else {
+      console.log('not new');
+
     }
   }
 }

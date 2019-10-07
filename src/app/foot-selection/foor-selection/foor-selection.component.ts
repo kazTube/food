@@ -2,15 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewContainerRef } from '@a
 import { FoodDTO } from '../../DTO/foodDTO';
 import { Router } from '@angular/router';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-
-import {
-  ComponentPortal,
-  // This import is only used to define a generic type. The current TypeScript version incorrectly
-  // considers such imports as unused (https://github.com/Microsoft/TypeScript/issues/14953)
-  // tslint:disable-next-line:no-unused-variable
-  Portal,
-  TemplatePortalDirective
-} from '@angular/cdk/portal';
 import { ObserverService } from 'src/app/core/observer.service';
 import { SelectionFoodService } from '../selection-food.service';
 import { RoutingService } from 'src/app/routing/routing.service';
@@ -67,8 +58,7 @@ export class FoorSelectionComponent implements OnInit {
             if (r) {
               this.routeService.setNavigat(false);
 
-              console.log(r);
-
+              this.router.navigateByUrl('');
             } else {
               this.routeService.setNavigat(true);
             }

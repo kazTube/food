@@ -11,12 +11,12 @@ import { DialogService } from 'src/app/core/dialog.service';
   styleUrls: ['./map-desktop.component.scss']
 })
 export class MapDesktopComponent implements OnInit {
-
-  constructor(private service: MapService, 
-              private router: Router, 
-              private observer: ObserverService, 
-              private routeService: RoutingService,
-              private dialogService:DialogService) { }
+  foods: any[] = [];
+  constructor(private service: MapService,
+    private router: Router,
+    private observer: ObserverService,
+    private routeService: RoutingService,
+    private dialogService: DialogService) { }
 
   point(id: number) {
     this.observer.setStateId(id);
@@ -36,10 +36,30 @@ export class MapDesktopComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-    this.dialogService.openConfirmDialog('برای رای دادن به بیش از یک استان عضو شوید.');
-      
-    }, 5000);
-  }
+    const guest_token = localStorage.getItem('guest_token');
+    if (guest_token) {
+      this.service.checkVotedBefore(guest_token).subscribe(
+        r => {
+          console.log(r);
 
+          this.foods = r['data']['foods'];
+          if (this.foods) {
+            this.dialogService.openConfirmDialog('برای رای دادن به بیش از یک استان عضو شوید.');
+          }
+        }
+      );
+    }else {
+      const token = localStorage.getItem('Token')
+      this.service.checkVotedBefore(token).subscribe(
+        r => {
+          console.log(r);
+
+          // this.foods = r['data']['foods'];
+          // if (this.foods) {
+          //   this.dialogService.openConfirmDialog('برای رای دادن به بیش از یک استان عضو شوید.');
+          // }
+        }
+      );
+    }
+  }
 }

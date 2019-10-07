@@ -15,24 +15,28 @@ export class LoginDesktopComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      username:new FormControl(
-        undefined,[Validators.required]
+      username: new FormControl(
+        undefined, [Validators.required]
       ),
       password: new FormControl(
-        undefined,[Validators.required]
+        undefined, [Validators.required]
       )
     })
   }
-  onSubmit(){
-    if(this.loginForm.valid){
-      this.registerService.login(this.loginForm.value['username'],this.loginForm.value['password']).subscribe(
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.registerService.login(this.loginForm.value['username'], this.loginForm.value['password']).subscribe(
         r => {
-          console.log(r);
-          
+          if (r) {
+            localStorage.setItem('Token', r['data']['token']);
+            localStorage.removeItem('guest_token');
+            this.router.navigateByUrl('');
+          }
+
         }
       );
     }
-    
+
   }
   ngOnInit() {
   }
